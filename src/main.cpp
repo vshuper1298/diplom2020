@@ -6,6 +6,7 @@
 #include <iostream>
 #include <thread>
 #include "algorithm.hpp"
+#include "database.hpp"
 
 using namespace std;
 using namespace cv;
@@ -66,6 +67,8 @@ vector<int> labels;
 // ------------------------------------------------------------------------------------------------------------
 int main(int argc, char **argv)
 {
+  storage::DataBase db;
+  db.openDB();
     labels.resize(2);
     for (int i = 0; i < labels.size(); i++)
         labels[i] = i;

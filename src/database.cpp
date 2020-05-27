@@ -32,7 +32,7 @@ namespace storage
   bool DataBase::openDB()
   {
     /* Open database */
-    int rc = sqlite3_open("test.db", &m_database);
+    int rc = sqlite3_open(config::storage::DATABASE_FILE, &m_database);
 
     if(rc)
     {
@@ -41,7 +41,7 @@ namespace storage
     }
     else
     {
-      loger::Info("Operation done successfully");
+      loger::Info("DataBase oppened done successfully");
       return true;
     }    
   }
@@ -66,7 +66,7 @@ namespace storage
   bool DataBase::select()
   {
     /* Create and Execute SQL statement */
-    const char *query = "SELECT * from COMPANY";
+    const char *query = "SELECT * from Images";
     return executeQuery(query);
   }
 

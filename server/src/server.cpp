@@ -79,25 +79,20 @@ void* received(void* m)
 	return 0;
 }
 
+#define PORT 5689
+
 int main(int argc, char **argv)
 {
-	if(argc < 2) 
-  {
-		cerr << "Usage: ./server port (opt)time-send" << endl;
-		return 0;
-	}
-	if(argc == 3)
-		time_send = atoi(argv[2]);
 	std::signal(SIGINT, close_app);
 
 	pthread_t msg;
   vector<int> opts = { SO_REUSEPORT, SO_REUSEADDR };
 
-	if( tcp.setup(atoi(argv[1]),opts) == 0)
+	if (tcp.setup(PORT, opts) == 0)
   {
-		if( pthread_create(&msg, NULL, received, (void *)0) == 0)
+		if (pthread_create(&msg, NULL, received, (void *)0) == 0)
 		{
-			while(1)
+			while (1)
       {
 				tcp.accepted();
 				cerr << "Accepted" << endl;
